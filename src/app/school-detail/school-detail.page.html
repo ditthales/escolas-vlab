@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tab2"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Detalhes da Escola
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="schoolDetails">
+    <ion-card-header>
+      {{ schoolDetails.nome }}
+    </ion-card-header>
+    <ion-card-content>
+      <p>Endereço: {{ schoolDetails.endereco }}</p>
+      <p>Código INEP: {{ schoolDetails.codigoInep }}</p>
+      <p>Séries Atendidas: {{ schoolDetails.seriesAtendidas.join(', ') }}</p>
+      <p>Tipo: {{ schoolDetails.tipo === 'particular' ? 'Particular' : 'Pública' }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,7 @@
+{
+  "name": "escolas-vlab",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
