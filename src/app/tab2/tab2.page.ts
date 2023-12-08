@@ -46,8 +46,6 @@ export class Tab2Page {
       .filter(([key, value]) => value !== null)
       .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
   
-    console.log(filteredSearchParams);
-  
     if (Object.keys(filteredSearchParams).length > 0) {
       this.filteredItems = await this.itemService.searchItems(filteredSearchParams);
     } else {

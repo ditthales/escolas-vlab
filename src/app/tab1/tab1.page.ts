@@ -10,13 +10,12 @@ import { ItemService } from '../tab2/school.service';
 })
 export class Tab1Page {
 
-  favoriteSchools: (School | null)[] = [];
+  favoriteSchools: School[] = [];
 
   constructor(private favoriteService: FavoriteService, private itemService: ItemService) {}
 
   ionViewWillEnter() {
     this.loadFavoriteSchools();
-    console.log("favoritas no carregamento", this.favoriteSchools);
   }
 
   private loadFavoriteSchools() {

@@ -19,7 +19,7 @@
   <!-- Conteúdo da lista se o array não estiver vazio -->
   <ng-template #content>
     <ion-list>
-      <ion-item *ngFor="let favorite of favoriteSchools">
+      <ion-item *ngFor="let favorite of favoriteSchools" [routerLink]="['/school-detail', favorite.coEntidade]">
         {{ favorite?.noEntidade }}
       </ion-item>
     </ion-list>

@@ -23,7 +23,6 @@ export class ItemService {
       (data) => {
         this.schools = data;
         console.log('Schools fetched successfully!');
-        console.log('Schools:', this.schools);
         this.schoolsSubject.next(data);
       },
       (error) => {
@@ -57,7 +56,6 @@ export class ItemService {
   }
   
   searchItemsByINEPCode(query: number): School | null {
-    console.log("details: ", this.schools)
 
     const schoolDetails: School | undefined = this.schools.find((school) => school.coEntidade === query);
 

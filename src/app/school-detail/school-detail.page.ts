@@ -21,7 +21,6 @@ export class SchoolDetailPage implements OnInit {
 
       if (isNaN(coEntidade) === false) {
         this.schoolDetails = this.itemService.searchItemsByINEPCode(coEntidade);
-        console.log(this.schoolDetails);
       } else {
         console.error('O parâmetro coEntidade não é um número.');
       }

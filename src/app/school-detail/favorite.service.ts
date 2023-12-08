@@ -14,7 +14,6 @@ export class FavoriteService {
 
   toggleFavorite(school: School): void {
     this.favoriteSchools.push(school);
-    console.log("favoritas", this.favoriteSchools);
   }
 
   isFavorite(school: School): boolean {
