@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { School } from '../tab2/school.interface';
+import { FavoriteService } from '../school-detail/favorite.service';
+import { ItemService } from '../tab2/school.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +10,18 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  favoriteSchools: (School | null)[] = [];
+
+  constructor(private favoriteService: FavoriteService, private itemService: ItemService) {}
+
+  ionViewWillEnter() {
+    this.loadFavoriteSchools();
+    console.log("favoritas no carregamento", this.favoriteSchools);
+  }
+
+  private loadFavoriteSchools() {
+    this.favoriteSchools = this.favoriteService.getFavoriteSchools();
+  }
+  
 
 }

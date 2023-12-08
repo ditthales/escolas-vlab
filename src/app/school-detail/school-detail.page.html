@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/tab2"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Detalhes da Escola
+      {{ schoolDetails?.noEntidade }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,11 +14,74 @@
     <ion-card-header>
       {{ schoolDetails.noEntidade }}
     </ion-card-header>
+
     <ion-card-content>
-      <p>Endereço: {{ schoolDetails.dsEndereco }}</p>
-      <p>Código INEP: {{ schoolDetails.coEntidade }}</p>
-      <p>Telefone: {{ schoolDetails.nuTelefone }}</p>
-      <p>Rede: {{ schoolDetails.rede }}</p>
+      <ion-list>
+
+        <!-- Informações básicas -->
+        <ion-item>
+          <ion-label>Endereço:</ion-label>
+          <ion-text>{{ schoolDetails.dsEndereco }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Código INEP:</ion-label>
+          <ion-text>{{ schoolDetails.coEntidade }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Telefone:</ion-label>
+          <ion-text>({{ schoolDetails.nuDdd }}) {{ schoolDetails.nuTelefone }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Rede:</ion-label>
+          <ion-text>{{ schoolDetails.rede }}</ion-text>
+        </ion-item>
+
+        <!-- Informações adicionais -->
+        <ion-item>
+          <ion-label>Localização:</ion-label>
+          <ion-text>{{ schoolDetails.localizacao }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Região:</ion-label>
+          <ion-text>{{ schoolDetails.noRegiao }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>UF:</ion-label>
+          <ion-text>{{ schoolDetails.sgUf }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Município:</ion-label>
+          <ion-text>{{ schoolDetails.noMunicipio }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Bairro:</ion-label>
+          <ion-text>{{ schoolDetails.noBairro }}</ion-text>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>CEP:</ion-label>
+          <ion-text>{{ schoolDetails.coCep }}</ion-text>
+        </ion-item>
+
+        <!-- Mais informações podem ser adicionadas conforme necessário -->
+
+        <ion-item>
+          <ion-button expand="full" (click)="openGoogleMaps()">
+            Abrir no Google Maps
+          </ion-button>
+        </ion-item>
+
+      </ion-list>
     </ion-card-content>
   </ion-card>
+  <ion-button expand="full" (click)="toggleFavorite()" class="custom-button">
+    {{ isFavorite ? 'Desfavoritar' : 'Favoritar' }}
+  </ion-button>
 </ion-content>

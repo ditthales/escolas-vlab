@@ -46,6 +46,15 @@ export class ItemService {
       });
     });
   }
+
+  searchItemsByID(query: number): Promise<School> {
+    return new Promise((resolve) => {
+      this.fetchSchools({ coEntidade: query });
+      this.schoolsObservable.subscribe((schools) => {
+        resolve(schools[0]);
+      });
+    });
+  }
   
   searchItemsByINEPCode(query: number): School | null {
     console.log("details: ", this.schools)
