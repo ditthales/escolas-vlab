@@ -8,11 +8,15 @@
   <!-- Barra de busca por nome -->
   <ion-searchbar placeholder="Nome da escola" [(ngModel)]="searchParams.noEntidade" (ionInput)="search()"></ion-searchbar>
 
+  <ion-item>
+    <ion-toggle [(ngModel)]="showAdvancedSearch" aria-label="Mostrar busca avançada" label="Mostrar busca avançada">Mostrar busca avançada</ion-toggle>
+  </ion-item>
+
   <!-- Barra de busca por código INEP, estado e tipo de rede -->
-  <ion-searchbar placeholder="Código INEP" [(ngModel)]="searchParams.coEntidade" (ionInput)="search()" clearInput></ion-searchbar>
+  <ion-searchbar *ngIf="showAdvancedSearch" placeholder="Código INEP" [(ngModel)]="searchParams.coEntidade" (ionInput)="search()" clearInput></ion-searchbar>
 
   <!-- Dropdown para estado -->
-  <ion-item>
+  <ion-item *ngIf="showAdvancedSearch">
     <ion-label>Estado</ion-label>
     <ion-select placeholder="Selecione" [(ngModel)]="searchParams.sgUf" (ionChange)="search()" aria-label="Selecione o estado" label="Estado">
       <ion-select-option value="SP">São Paulo</ion-select-option>
@@ -21,7 +25,7 @@
     </ion-select>
   </ion-item>
   
-  <ion-item>
+  <ion-item *ngIf="showAdvancedSearch">
     <ion-label>Tipo de Rede</ion-label>
     <ion-select placeholder="Selecione" [(ngModel)]="searchParams.tpDependencia" (ionChange)="search()" aria-label="Selecione o tipo de rede" label="Tipo de Rede">
       <ion-select-option value="0">Todas</ion-select-option>
@@ -43,9 +47,18 @@
     </ion-toolbar>
   </ion-header>
 
+  <ng-container *ngIf="filteredItems.length === 0; else content">
+    <div class="empty-state">
+      <ion-icon name="alert-circle-outline" class="empty-state-icon"></ion-icon>
+      <p>Nenhuma escola encontrada para os filtros fornecidos.</p>
+    </div>
+  </ng-container>
+
+  <ng-template #content>
   <ion-list>
     <ion-item *ngFor="let school of filteredItems" [routerLink]="['/school-detail', school.coEntidade]">
       {{ school.noEntidade }}
     </ion-item>
   </ion-list>
+  </ng-template>
 </ion-content>

@@ -21,6 +21,8 @@ export class Tab2Page {
 
   searchParams: SearchParams = {};
 
+  showAdvancedSearch = false;
+
   constructor(private itemService: ItemService, private router: Router) {
     this.items = this.itemService.getItems();
     this.filteredItems = [...this.items];
