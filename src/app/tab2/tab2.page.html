@@ -6,34 +6,59 @@
   </ion-toolbar>
 
   <!-- Barra de busca por nome -->
-  <ion-searchbar placeholder="Nome da escola" [(ngModel)]="searchParams.noEntidade" (ionInput)="search()"></ion-searchbar>
+  <ion-searchbar placeholder="Nome da escola" [(ngModel)]="searchParams.noEntidade" (ionInput)="searchAndResetPage()"></ion-searchbar>
 
   <ion-item>
     <ion-toggle [(ngModel)]="showAdvancedSearch" aria-label="Mostrar busca avançada" label="Mostrar busca avançada">Mostrar busca avançada</ion-toggle>
   </ion-item>
 
   <!-- Barra de busca por código INEP, estado e tipo de rede -->
-  <ion-searchbar *ngIf="showAdvancedSearch" placeholder="Código INEP" [(ngModel)]="searchParams.coEntidade" (ionInput)="search()" clearInput></ion-searchbar>
+  <ion-searchbar *ngIf="showAdvancedSearch" placeholder="Código INEP" [(ngModel)]="searchParams.coEntidade" (ionInput)="searchAndResetPage()" clearInput></ion-searchbar>
 
   <!-- Dropdown para estado -->
   <ion-item *ngIf="showAdvancedSearch">
     <ion-label>Estado</ion-label>
-    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.sgUf" (ionChange)="search()" aria-label="Selecione o estado" label="Estado">
-      <ion-select-option value="SP">São Paulo</ion-select-option>
+    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.sgUf" (ionChange)="searchAndResetPage()" aria-label="Selecione o estado" label="Estado">
       <ion-select-option value="null">Todos</ion-select-option>
-      <!-- Adicione outras opções conforme necessário -->
+      <ion-select-option value="AC">Acre</ion-select-option>
+      <ion-select-option value="AL">Alagoas</ion-select-option>
+      <ion-select-option value="AP">Amapá</ion-select-option>
+      <ion-select-option value="AM">Amazonas</ion-select-option>
+      <ion-select-option value="BA">Bahia</ion-select-option>
+      <ion-select-option value="CE">Ceará</ion-select-option>
+      <ion-select-option value="DF">Distrito Federal</ion-select-option>
+      <ion-select-option value="ES">Espírito Santo</ion-select-option>
+      <ion-select-option value="GO">Goiás</ion-select-option>
+      <ion-select-option value="MA">Maranhão</ion-select-option>
+      <ion-select-option value="MT">Mato Grosso</ion-select-option>
+      <ion-select-option value="MS">Mato Grosso do Sul</ion-select-option>
+      <ion-select-option value="MG">Minas Gerais</ion-select-option>
+      <ion-select-option value="PA">Pará</ion-select-option>
+      <ion-select-option value="PB">Paraíba</ion-select-option>
+      <ion-select-option value="PR">Paraná</ion-select-option>
+      <ion-select-option value="PE">Pernambuco</ion-select-option>
+      <ion-select-option value="PI">Piauí</ion-select-option>
+      <ion-select-option value="RJ">Rio de Janeiro</ion-select-option>
+      <ion-select-option value="RN">Rio Grande do Norte</ion-select-option>
+      <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
+      <ion-select-option value="RO">Rondônia</ion-select-option>
+      <ion-select-option value="RR">Roraima</ion-select-option>
+      <ion-select-option value="SC">Santa Catarina</ion-select-option>
+      <ion-select-option value="SP">São Paulo</ion-select-option>
+      <ion-select-option value="SE">Sergipe</ion-select-option>
+      <ion-select-option value="TO">Tocantins</ion-select-option>
     </ion-select>
+    
   </ion-item>
   
   <ion-item *ngIf="showAdvancedSearch">
     <ion-label>Tipo de Rede</ion-label>
-    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.tpDependencia" (ionChange)="search()" aria-label="Selecione o tipo de rede" label="Tipo de Rede">
+    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.tpDependencia" (ionChange)="searchAndResetPage()" aria-label="Selecione o tipo de rede" label="Tipo de Rede">
       <ion-select-option value="0">Todas</ion-select-option>
       <ion-select-option value="1">Federal</ion-select-option>
       <ion-select-option value="2">Estadual</ion-select-option>
       <ion-select-option value="3">Municipal</ion-select-option>
       <ion-select-option value="4">Privada</ion-select-option>
-      <!-- Adicione outras opções conforme necessário -->
     </ion-select>
   </ion-item>
   
@@ -41,6 +66,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <div class="content-container">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Buscar</ion-title>
@@ -61,4 +87,19 @@
     </ion-item>
   </ion-list>
   </ng-template>
+</div>
+
+<div class="pagination-buttons">
+  <ion-buttons>
+    <ion-button (click)="changePage(-1)" [disabled]="searchParams.page === 0 || searchParams === undefined">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-label>Pagina {{ searchParams.page === undefined ? 1 : searchParams.page + 1 }}</ion-label>
+    <ion-button (click)="changePage(1)">
+      <ion-icon name="arrow-forward"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  </div>
 </ion-content>
+
+  

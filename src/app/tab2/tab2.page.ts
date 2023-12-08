@@ -8,6 +8,7 @@ interface SearchParams {
   coEntidade?: string | null;
   sgUf?: string | null;
   tpDependencia?: string | null;
+  page?: number;
 }
 
 @Component({
@@ -33,6 +34,25 @@ export class Tab2Page {
       this.items = schools;
       this.filteredItems = [...this.items];
     });
+  }
+
+  changePage(increment: number) {
+    if (this.searchParams.page === undefined) {
+      this.searchParams.page = 0;
+    }
+  
+    this.searchParams.page += increment;
+  
+    if (this.searchParams.page < 0) {
+      this.searchParams.page = 0;
+    }
+  
+    this.search();
+  }
+
+  searchAndResetPage() {
+    this.searchParams.page = 0;
+    this.search();
   }
 
   async search() {

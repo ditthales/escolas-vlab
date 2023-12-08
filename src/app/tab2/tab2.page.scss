@@ -11,3 +11,26 @@
     margin-bottom: 10px;
   }
   
+  .pagination-buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .pagination-buttons ion-buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+  }
+
+  .content-container {
+    height: calc(100% - 48px);
+    overflow-y: auto;
+  }
+
+  
+  
+  
+  
