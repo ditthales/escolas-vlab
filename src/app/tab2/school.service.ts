@@ -1,99 +1,57 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { School } from './school.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
+  private schools: School[] = [];
+  private schoolsSubject: BehaviorSubject<School[]> = new BehaviorSubject<School[]>([]);
+  public schoolsObservable: Observable<School[]> = this.schoolsSubject.asObservable();
 
-    private schools: School[] = [
-        {
-          nome: 'Escola Alpha',
-          endereco: 'Rua Principal, 123',
-          codigoInep: '98765432',
-          seriesAtendidas: ['1º Ano', '2º Ano', '3º Ano'],
-          tipo: 'particular',
-        },
-        {
-          nome: 'Escola Beta',
-          endereco: 'Avenida Secundária, 456',
-          codigoInep: '87654321',
-          seriesAtendidas: ['4º Ano', '5º Ano', '6º Ano'],
-          tipo: 'publica',
-        },
-        {
-          nome: 'Escola Gama',
-          endereco: 'Travessa dos Estudantes, 789',
-          codigoInep: '76543210',
-          seriesAtendidas: ['7º Ano', '8º Ano', '9º Ano'],
-          tipo: 'particular',
-        },
-        {
-          nome: 'Escola Delta',
-          endereco: 'Praça da Educação, 101',
-          codigoInep: '65432109',
-          seriesAtendidas: ['Ensino Médio'],
-          tipo: 'publica',
-        },
-        {
-          nome: 'Escola Ômega',
-          endereco: 'Alameda da Sabedoria, 202',
-          codigoInep: '54321098',
-          seriesAtendidas: ['1º Ano', '2º Ano'],
-          tipo: 'particular',
-        },
-        {
-          nome: 'Escola Zeta',
-          endereco: 'Estrada do Conhecimento, 303',
-          codigoInep: '43210987',
-          seriesAtendidas: ['3º Ano', '4º Ano'],
-          tipo: 'publica',
-        },
-        {
-          nome: 'Escola Sigma',
-          endereco: 'Acesso ao Saber, 404',
-          codigoInep: '32109876',
-          seriesAtendidas: ['5º Ano', '6º Ano'],
-          tipo: 'particular',
-        },
-        {
-          nome: 'Escola Kappa',
-          endereco: 'Caminho do Aprendizado, 505',
-          codigoInep: '21098765',
-          seriesAtendidas: ['7º Ano', '8º Ano'],
-          tipo: 'publica',
-        },
-        {
-          nome: 'Escola Lambda',
-          endereco: 'Passagem da Educação, 606',
-          codigoInep: '10987654',
-          seriesAtendidas: ['9º Ano'],
-          tipo: 'particular',
-        },
-        {
-          nome: 'Escola Epsilon',
-          endereco: 'Via do Saber, 707',
-          codigoInep: '09876543',
-          seriesAtendidas: ['Ensino Médio'],
-          tipo: 'publica',
-        },
-      ];
+  constructor(private http: HttpClient) {
+    this.fetchSchools();
+  }
 
-    private items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  private fetchSchools(params?: any): void {
+    const apiUrl = 'http://157.230.55.217/api/escolas';
+    const options = { params: params };
+  
+    this.http.get<School[]>(apiUrl, options).subscribe(
+      (data) => {
+        this.schools = data;
+        console.log('Schools fetched successfully!');
+        console.log('Schools:', this.schools);
+        this.schoolsSubject.next(data);
+      },
+      (error) => {
+        console.error('Error fetching schools:', error);
+      }
+    );
+  }
+  
+  
 
-    getItems(): School[] {
-        return this.schools;
-    }
+  getItems(): School[] {
+    return this.schools;
+  }
 
-    searchItems(query: string): School[] {
-        // Filtrar a lista com base na pesquisa
-        return this.schools.filter(item => item.nome.toLowerCase().includes(query.toLowerCase()));
-    }
+  searchItems(query: string): Promise<School[]> {
+    return new Promise((resolve) => {
+      this.fetchSchools({ noEntidade: query });
+      this.schoolsObservable.subscribe((schools) => {
+        resolve(schools);
+      });
+    });
+  }
+  
+  searchItemsByINEPCode(query: number): School | null {
+    console.log("details: ", this.schools)
 
-    searchItemsByINEPCode(query: string): School | null {
-        // Filtrar a lista com base na pesquisa
-        const schoolDetails: School | undefined = this.schools.find(school => school.codigoInep === query);
-    
-        return schoolDetails || null;
-    }
+    const schoolDetails: School | undefined = this.schools.find((school) => school.coEntidade === query);
+
+    return schoolDetails || null;
+  }
 }

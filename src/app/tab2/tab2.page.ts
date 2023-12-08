@@ -18,13 +18,21 @@ export class Tab2Page {
     this.filteredItems = [...this.items];
   }
 
-  search(event: any) {
-    const query = event.detail.value;
-    this.filteredItems = this.itemService.searchItems(query);
+  ngOnInit() {
+    this.itemService.schoolsObservable.subscribe((schools) => {
+      this.items = schools;
+      this.filteredItems = [...this.items];
+    });
   }
 
+  async search(event: any) {
+    const query = event.detail.value;
+    this.filteredItems = await this.itemService.searchItems(query);
+  }
+  
+
   goToSchoolDetail(school: School) {
-    this.router.navigate(['/school-detail', school.codigoInep]);
+    this.router.navigate(['/school-detail', school.coEntidade]);
   }
   
 }

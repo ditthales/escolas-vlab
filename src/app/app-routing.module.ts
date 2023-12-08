@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'school-detail/:codigoInep',
+    path: 'school-detail/:coEntidade',
     loadChildren: () => import('./school-detail/school-detail.module').then( m => m.SchoolDetailPageModule)
   }  
 ];

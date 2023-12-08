@@ -15,9 +15,16 @@ export class SchoolDetailPage implements OnInit {
 
   constructor(private route: ActivatedRoute, private itemService: ItemService) {
     this.route.params.subscribe(params => {
-      const codigoInep = params['codigoInep'];
-      // Use o código INEP para obter os detalhes da escola, por exemplo, do serviço ItemService
-      this.schoolDetails = this.itemService.searchItemsByINEPCode(codigoInep);
+      const coEntidadeParam = params['coEntidade'];
+
+      const coEntidade = parseInt(coEntidadeParam, 10);
+
+      if (isNaN(coEntidade) === false) {
+        this.schoolDetails = this.itemService.searchItemsByINEPCode(coEntidade);
+        console.log(this.schoolDetails);
+      } else {
+        console.error('O parâmetro coEntidade não é um número.');
+      }
     });
   }
   

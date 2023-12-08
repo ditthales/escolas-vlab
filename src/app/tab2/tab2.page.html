@@ -4,7 +4,7 @@
       Buscar
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -15,8 +15,8 @@
   </ion-header>
 
   <ion-list>
-    <ion-item *ngFor="let school of filteredItems" [routerLink]="['/school-detail', school.codigoInep]">
-      {{ school.nome }}
+    <ion-item *ngFor="let school of filteredItems" [routerLink]="['/school-detail', school.coEntidade]">
+      {{ school.noEntidade }}
     </ion-item>
   </ion-list>
 </ion-content>
