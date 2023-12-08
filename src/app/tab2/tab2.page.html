@@ -4,7 +4,36 @@
       Buscar
     </ion-title>
   </ion-toolbar>
-  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+
+  <!-- Barra de busca por nome -->
+  <ion-searchbar placeholder="Nome da escola" [(ngModel)]="searchParams.noEntidade" (ionInput)="search()"></ion-searchbar>
+
+  <!-- Barra de busca por código INEP, estado e tipo de rede -->
+  <ion-searchbar placeholder="Código INEP" [(ngModel)]="searchParams.coEntidade" (ionInput)="search()" clearInput></ion-searchbar>
+
+  <!-- Dropdown para estado -->
+  <ion-item>
+    <ion-label>Estado</ion-label>
+    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.sgUf" (ionChange)="search()" aria-label="Selecione o estado" label="Estado">
+      <ion-select-option value="SP">São Paulo</ion-select-option>
+      <ion-select-option value="null">Todos</ion-select-option>
+      <!-- Adicione outras opções conforme necessário -->
+    </ion-select>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label>Tipo de Rede</ion-label>
+    <ion-select placeholder="Selecione" [(ngModel)]="searchParams.tpDependencia" (ionChange)="search()" aria-label="Selecione o tipo de rede" label="Tipo de Rede">
+      <ion-select-option value="0">Todas</ion-select-option>
+      <ion-select-option value="1">Federal</ion-select-option>
+      <ion-select-option value="2">Estadual</ion-select-option>
+      <ion-select-option value="3">Municipal</ion-select-option>
+      <ion-select-option value="4">Privada</ion-select-option>
+      <!-- Adicione outras opções conforme necessário -->
+    </ion-select>
+  </ion-item>
+  
+
 </ion-header>
 
 <ion-content [fullscreen]="true">

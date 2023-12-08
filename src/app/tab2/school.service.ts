@@ -38,9 +38,9 @@ export class ItemService {
     return this.schools;
   }
 
-  searchItems(query: string): Promise<School[]> {
+  searchItems(params?: any): Promise<School[]> {
     return new Promise((resolve) => {
-      this.fetchSchools({ noEntidade: query });
+      this.fetchSchools(params);
       this.schoolsObservable.subscribe((schools) => {
         resolve(schools);
       });

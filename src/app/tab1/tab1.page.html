@@ -7,9 +7,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item *ngFor="let favorite of favoriteSchools">
-      {{ favorite?.noEntidade }}
-    </ion-item>
-  </ion-list>
+  <!-- Verifica se o array está vazio -->
+  <ng-container *ngIf="favoriteSchools.length === 0; else content">
+    <!-- Mostra um estado vazio se o array estiver vazio -->
+    <div class="empty-state">
+      <ion-icon name="alert-circle-outline" class="empty-state-icon"></ion-icon>
+      <p>Nenhuma escola favorita encontrada.</p>
+    </div>
+  </ng-container>
+
+  <!-- Conteúdo da lista se o array não estiver vazio -->
+  <ng-template #content>
+    <ion-list>
+      <ion-item *ngFor="let favorite of favoriteSchools">
+        {{ favorite?.noEntidade }}
+      </ion-item>
+    </ion-list>
+  </ng-template>
 </ion-content>
