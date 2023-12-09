@@ -55,8 +55,11 @@ Para rodar no navegador
 
 Para rodar no Android Studio
 ```bash
+  ionic capacitor sync android
   ionic cap open android
 ```
+
+Ou apenas [baixe o apk](https://drive.google.com/file/d/1XVmHoUnMZ7OVXU46o8WEICsyzFV_a4my/view?usp=sharing) e instale em seu dispositivo
 
     
 ## Tecnologias utilizadas
