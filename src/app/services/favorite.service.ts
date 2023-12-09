@@ -1,6 +1,6 @@
 // favorite.service.ts
 import { Injectable, EventEmitter } from '@angular/core';
-import { School } from '../tab2/school.interface';
+import { School } from '../interfaces/school.interface';
 
 @Injectable({
   providedIn: 'root',

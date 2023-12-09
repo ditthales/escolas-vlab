@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ItemService } from './school.service';
-import { School } from './school.interface';
+import { ItemService } from '../services/school.service';
+import { School } from '../interfaces/school.interface';
 import { Router } from '@angular/router';
 
 interface SearchParams {

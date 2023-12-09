@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
-import { School } from '../tab2/school.interface';
-import { FavoriteService } from '../school-detail/favorite.service';
-import { ItemService } from '../tab2/school.service';
+import { School } from '../interfaces/school.interface';
+import { FavoriteService } from '../services/favorite.service';
+import { ItemService } from '../services/school.service';
 import { Subscription } from 'rxjs';
 
 @Component({

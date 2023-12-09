@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ItemService } from '../tab2/school.service';
-import { School } from '../tab2/school.interface';
-import { FavoriteService } from './favorite.service';
+import { ItemService } from '../services/school.service';
+import { School } from '../interfaces/school.interface';
+import { FavoriteService } from '../services/favorite.service';
 
 @Component({
   selector: 'app-school-detail',
