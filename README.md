@@ -19,10 +19,10 @@ Na outra tab é possível ver as escolas marcadas como favoritas, bem como clica
 - Pesquisa avançada por código INEP, estado e tipo de rede
 - Possibilidade de favoritar escolas
 - Lista de escolas favoritas
+- Persistencia de dados (escolas favoritas)
 - Visualização dos detalhes da escola
 - Localização da escola no Google Maps
 - Light & Dark mode
-- Cross platform
 
 
 ## Demo
