@@ -13,19 +13,26 @@ export class SchoolDetailPage implements OnInit {
 
   schoolDetails: School | null = null;
 
+  parentRoute: string = '';
+
   constructor(private route: ActivatedRoute, private itemService: ItemService, private favoriteService: FavoriteService) {
+
     this.route.params.subscribe(params => {
       const coEntidadeParam = params['coEntidade'];
 
       const coEntidade = parseInt(coEntidadeParam, 10);
 
       if (isNaN(coEntidade) === false) {
+
         this.schoolDetails = this.itemService.searchItemsByINEPCode(coEntidade);
+        if (this.schoolDetails === null) {
+          this.schoolDetails = this.favoriteService.searchItemsByINEPCode(coEntidade);
+        }
+        console.log(this.schoolDetails)
       } else {
         console.error('O parâmetro coEntidade não é um número.');
       }
     });
-  
   }
   
 

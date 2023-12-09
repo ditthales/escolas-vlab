@@ -17,6 +17,14 @@ export class FavoriteService {
   }
 
   isFavorite(school: School): boolean {
-    return this.favoriteSchools.includes(school);
+    return this.favoriteSchools.some(favoriteSchool => favoriteSchool.coEntidade === school.coEntidade);
   }
+
+  searchItemsByINEPCode(query: number): School | null {
+
+    const schoolDetails: School | undefined = this.favoriteSchools.find((school) => school.coEntidade === query);
+
+    return schoolDetails || null;
+  }
+
 }
