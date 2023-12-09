@@ -27,7 +27,7 @@ Na outra tab é possível ver as escolas marcadas como favoritas, bem como clica
 
 ## Demo
 
-[![Assista ao vídeo de demonstração]()](https://www.youtube.com/watch?v=MKGjp7aYuYw&ab)
+- [Assista ao vídeo de demonstração](https://www.youtube.com/watch?v=MKGjp7aYuYw&ab)
 
 
 ## Instalação e teste
