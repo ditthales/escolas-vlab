@@ -16,7 +16,6 @@ export class Tab1Page {
 
   ionViewWillEnter() {
     this.loadFavoriteSchools();
-    console.log(this.favoriteSchools)
   }
 
   private loadFavoriteSchools() {

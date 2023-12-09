@@ -28,7 +28,6 @@ export class SchoolDetailPage implements OnInit {
         if (this.schoolDetails === null) {
           this.schoolDetails = this.favoriteService.searchItemsByINEPCode(coEntidade);
         }
-        console.log(this.schoolDetails)
       } else {
         console.error('O parâmetro coEntidade não é um número.');
       }
