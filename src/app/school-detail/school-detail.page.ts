@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ItemService } from '../services/school.service';
 import { School } from '../interfaces/school.interface';
 import { FavoriteService } from '../services/favorite.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-school-detail',
@@ -15,7 +16,7 @@ export class SchoolDetailPage implements OnInit {
 
   parentRoute: string = '';
 
-  constructor(private route: ActivatedRoute, private itemService: ItemService, private favoriteService: FavoriteService) {
+  constructor(private route: ActivatedRoute, private itemService: ItemService, private favoriteService: FavoriteService, private dataService: DataService) {
 
     this.route.params.subscribe(params => {
       const coEntidadeParam = params['coEntidade'];
@@ -42,6 +43,7 @@ export class SchoolDetailPage implements OnInit {
     if (this.schoolDetails) {
       const school = this.schoolDetails;
       this.favoriteService.toggleFavorite(school);
+      this.dataService.saveData('favoriteSchools', this.favoriteService.getFavoriteSchools());
     }
   }
 

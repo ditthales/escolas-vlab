@@ -13,6 +13,11 @@ export class FavoriteService {
     return this.favoriteSchools;
   }
 
+  setFavoriteSchools(schools: School[]) {
+    this.favoriteSchools = schools;
+    this.favoritesChanged.emit(this.favoriteSchools);
+  }
+
   toggleFavorite(school: School): void {
     if (this.isFavorite(school)) {
       this.removeFavorite(school.coEntidade);
@@ -24,7 +29,6 @@ export class FavoriteService {
 
   removeFavorite(coEntidade: number): void {
     this.favoriteSchools = this.favoriteSchools.filter(school => school.coEntidade !== coEntidade);
-    this.favoritesChanged.emit(this.favoriteSchools);
   }
 
   isFavorite(school: School): boolean {
